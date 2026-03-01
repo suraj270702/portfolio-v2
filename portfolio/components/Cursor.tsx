@@ -6,6 +6,9 @@ export default function Cursor() {
   const followerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const isDesktop = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!isDesktop) return;
+
     const cursor = cursorRef.current;
     const follower = followerRef.current;
     if (!cursor || !follower) return;
@@ -28,27 +31,18 @@ export default function Cursor() {
       requestAnimationFrame(animate);
     };
 
-    const onEnter = () => {
-      cursor.style.transform = "scale(2)";
-      follower.style.width = "60px";
-      follower.style.height = "60px";
-    };
-
-    const onLeave = () => {
-      cursor.style.transform = "scale(1)";
-      follower.style.width = "36px";
-      follower.style.height = "36px";
-    };
-
     document.addEventListener("mousemove", onMove);
-    document.querySelectorAll("a, button, [data-hover]").forEach((el) => {
-      el.addEventListener("mouseenter", onEnter);
-      el.addEventListener("mouseleave", onLeave);
-    });
-
     animate();
-    return () => document.removeEventListener("mousemove", onMove);
+
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+    };
   }, []);
+
+  if (typeof window !== "undefined") {
+    const isDesktop = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!isDesktop) return null;
+  }
 
   return (
     <>

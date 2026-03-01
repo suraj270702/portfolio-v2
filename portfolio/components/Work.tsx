@@ -86,7 +86,7 @@ function ProjectRow({ project, index }: { project: typeof projects[0]; index: nu
             </h3>
             <span className="font-mono text-xs text-white/30 tracking-widest uppercase">{project.category}</span>
           </div>
-          <p className={`text-sm text-white/40 mt-2 max-w-xl leading-relaxed transition-all duration-300 overflow-hidden ${hovered ? "max-h-20 opacity-100" : "max-h-0 opacity-0 md:max-h-none md:opacity-100"}`}>
+          <p className={`text-sm text-white/40 mt-2 max-w-xl leading-relaxed transition-all duration-300 overflow-hidden `}>
             {project.description}
           </p>
         </div>
